@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Claim Date"
+            android:textSize="8sp"/>
+
+        <TextView
+            android:id="@+id/travel_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Claim Date"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="From District"
+            android:textSize="8sp"
+            android:layout_marginTop="5dp"/>
+
+        <EditText
+            android:id="@+id/from_district_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:tag="FROM_DISTRICT"
+            android:focusable="false">
+        </EditText>
+
+        <EditText
+            android:id="@+id/to_district_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:tag="TO_DISTRICT"
+            android:focusable="false">
+        </EditText>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
