@@ -115,14 +115,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             claimLiveData.observe(MainActivity.this, new Observer<List<ClaimDbModel>>() {
                 @Override
                 public void onChanged(List<ClaimDbModel> claimDbModels) {
-//                    Log.i("Soumya", "" + claimDbModels.get(1).getClaimsList()
-//                            .get(1).getClaimTypeDetailList()
-//                            .get(1).getClaimField().getClaimFieldOptionList()
-//                            .get(0).getName());
-//                    Toast.makeText(MainActivity.this, "Soumya" + claimDbModels.get(1).getClaimsList()
-//                            .get(1).getClaimTypeDetailList()
-//                            .get(1).getClaimField().getClaimFieldOptionList()
-//                            .get(0).getName(), Toast.LENGTH_SHORT).show();
                     mClaimsList = claimDbModels.get(0).getClaimsList();
                     ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_spinner_item);
                     for (int i = 0; i < mClaimsList.size(); i++) {
@@ -145,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private void displayDialog(List<Claims> mClaimsList, String labelType) {
         AlertDialog.Builder builderSingle = new AlertDialog.Builder(MainActivity.this);
-        builderSingle.setTitle("Select One Name:-");
+        builderSingle.setTitle("Select District");
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.select_dialog_singlechoice);
         Log.i("ClaimType", "" + mClaimsList.size());
         for (int i = 0; i < mClaimsList.size(); i++) {
@@ -155,9 +147,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 List<ClaimFieldOption> claimFieldOptionList = claimTypeDetailList1.get(j).getClaimField().getClaimFieldOptionList();
                 for (int k = 0; k < claimFieldOptionList.size(); k++) {
                     String name = claimFieldOptionList.get(k).getName();
-                    String id = claimFieldOptionList.get(k).getId();
                     Log.i("NAME", name);
-                    Log.i("NAME", id);
                     arrayAdapter.add(name);
                 }
             }
