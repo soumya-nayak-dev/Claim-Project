@@ -30,14 +30,14 @@ import com.mobisy.claimapp.utils.Util;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
+    private String FROM_DISTRICT = "From District";
+    private String TO_DISTRICT = "To District";
     private Spinner mClaimTypeSpinner;
     private TextView mTravelDate;
     private EditText mFromDistrictName;
     private EditText to_district_name;
     private List<Claims> mClaimsList;
     private String mLabel;
-    private String FROM_DISTRICT = "From District";
-    private String TO_DISTRICT = "To District";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
         Log.i("Item clicked = ", "" + adapterView.getItemAtPosition(pos));
-        Toast.makeText(this, "" + adapterView.getItemAtPosition(pos), Toast.LENGTH_SHORT).show();
         if (mClaimsList != null && mClaimsList.size() > 0) {
             if (adapterView.getItemAtPosition(pos).toString().equalsIgnoreCase("Travel")) {
                 mTravelDate.setText(mClaimsList.get(pos).getClaimTypeDetailList().get(pos).getClaimField().getCreated());
@@ -83,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 displayDialog(mClaimsList, TO_DISTRICT);
                 break;
             default:
-                throw new IllegalStateException("Unexpected value: " + tag);
+                Log.i("TAG", "No other case to handle");
         }
 
     }
@@ -125,7 +124,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 //                            .get(1).getClaimField().getClaimFieldOptionList()
 //                            .get(0).getName(), Toast.LENGTH_SHORT).show();
                     mClaimsList = claimDbModels.get(0).getClaimsList();
-                    Toast.makeText(MainActivity.this, "" + mClaimsList.size(), Toast.LENGTH_SHORT).show();
                     ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_spinner_item);
                     for (int i = 0; i < mClaimsList.size(); i++) {
                         String name = mClaimsList.get(i).getClaimType().getName();
@@ -156,23 +154,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 mLabel = claimTypeDetailList1.get(j).getClaimField().getLabel();
                 List<ClaimFieldOption> claimFieldOptionList = claimTypeDetailList1.get(j).getClaimField().getClaimFieldOptionList();
                 for (int k = 0; k < claimFieldOptionList.size(); k++) {
-                    if (mLabel.equalsIgnoreCase(FROM_DISTRICT)) {
-                        String name = claimFieldOptionList.get(k).getName();
-                        String id = claimFieldOptionList.get(k).getId();
-                        Log.i("NAME", name);
-                        Log.i("NAME", id);
-                    } else if (mLabel.equalsIgnoreCase(TO_DISTRICT)) {
-                        String name = claimFieldOptionList.get(k).getName();
-                        String id = claimFieldOptionList.get(k).getId();
-                    }
-
-//                    Log.i("NAME", name);
-//                    Log.i("NAME", id);
-//                    if (labelType.equalsIgnoreCase(mLabel)) {
-//                        arrayAdapter.add(name);
-//                    } else if (labelType.equalsIgnoreCase(mLabel)) {
-//                        arrayAdapter.add(name);
-//                    }
+                    String name = claimFieldOptionList.get(k).getName();
+                    String id = claimFieldOptionList.get(k).getId();
+                    Log.i("NAME", name);
+                    Log.i("NAME", id);
+                    arrayAdapter.add(name);
                 }
             }
         }
@@ -186,11 +172,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String strName = arrayAdapter.getItem(which);
-                if (labelType.equalsIgnoreCase(mLabel)) {
-                    mFromDistrictName.setText(strName);
-                } else if (labelType.equalsIgnoreCase(mLabel)) {
-                    to_district_name.setText(strName);
-                }
+                mFromDistrictName.setText(strName);
                 dialog.dismiss();
             }
         });
